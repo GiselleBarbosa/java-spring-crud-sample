@@ -1,2 +1,6 @@
-package com.giselle.crud.domains.product;public class ProductRepository {
+package com.giselle.crud.domains.product;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductRepository extends JpaRepository<Product, String> {
 }
