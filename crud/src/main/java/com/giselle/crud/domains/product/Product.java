@@ -11,7 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -20,9 +19,11 @@ public class Product {
 
     private Integer price_in_cents;
 
-    public Product(RequestProductDTO requestProductDTO) {
-        this.name = requestProductDTO.name();
-        this.price_in_cents = requestProductDTO.price_in_cents();
+    private Boolean active;
+
+    public Product(RequestProductDTO requestProduct) {
+        this.name = requestProduct.name();
+        this.price_in_cents = requestProduct.price_in_cents();
+        this.active = true;
     }
 }
-

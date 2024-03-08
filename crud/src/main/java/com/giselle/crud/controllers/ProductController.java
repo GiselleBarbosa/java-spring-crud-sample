@@ -6,7 +6,6 @@ import com.giselle.crud.domains.product.RequestProductDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +22,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> allProducts = productRepository.findAll();
+        List<Product> allProducts = productRepository.findAllByActiveTrue();
         return ResponseEntity.ok(allProducts);
     }
 
@@ -49,13 +48,15 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable String id) {
-        if (!productRepository.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado!");
+    public ResponseEntity<Product> deleteProduct(@PathVariable String id) {
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            product.setActive(false);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
         }
-        productRepository.deleteById(id);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Produto deletado!");
     }
 }
 
