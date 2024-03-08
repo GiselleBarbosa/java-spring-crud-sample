@@ -22,7 +22,7 @@ public class Product {
 
     public Product(RequestProductDTO requestProductDTO) {
         this.name = requestProductDTO.name();
-        this.price_in_cents = (Integer) requestProductDTO.price_in_cents();
+        this.price_in_cents = requestProductDTO.price_in_cents();
     }
 }
 
