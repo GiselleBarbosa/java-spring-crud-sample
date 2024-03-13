@@ -1,4 +1,4 @@
-package com.giselle.crud.domains.product;
+package com.giselle.crud.domain.product;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,7 +21,7 @@ public class Product {
 
     private Boolean active;
 
-    public Product(RequestProductDTO requestProduct) {
+    public Product(CreateProductRequest requestProduct) {
         this.name = requestProduct.name();
         this.price_in_cents = requestProduct.price_in_cents();
         this.active = true;

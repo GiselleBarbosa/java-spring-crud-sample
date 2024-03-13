@@ -1,4 +1,4 @@
-package com.giselle.crud.domains.product;
+package com.giselle.crud.domain.product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
